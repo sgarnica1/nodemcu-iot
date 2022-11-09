@@ -16,6 +16,9 @@ app.use(
   })
 );
 
+// MIDDLEWARE
+app.use(express.json());
+
 // Connect to MongoDB
 const mongoose = require("mongoose");
 const db = mongoose.connect(process.env.DATABASE_URL, {
@@ -25,4 +28,8 @@ db.then(() => {
   app.listen(port, () => console.log(`App listening on port ${port}!`));
 }).catch((err) => console.log(err));
 
-app.get("/", (req, res) => res.send("IoT Project"));
+
+// Routes
+const indexRouter = require("./src/routes/index");
+app.use("/data", indexRouter);
+app.get("/", (req, res) => res.status(200).json({ message: "NodeMCU IoT Project" }));
