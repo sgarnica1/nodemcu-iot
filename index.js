@@ -19,7 +19,7 @@ app.use(
 // Connect to MongoDB
 const mongoose = require("mongoose");
 const db = mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
+  useNewUrlParser: true
 });
 db.then(() => {
   app.listen(port, () => console.log(`App listening on port ${port}!`));
