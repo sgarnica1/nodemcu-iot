@@ -1,6 +1,7 @@
 const TempHumidity = require("../models/TempHumidity");
 const getData = async (req, res) => {
   console.log(req.query)
+  res.json({query: req.query});
   // if (req.query.temperature && req.query.humidity) {
   //   createData(req, res);
   //   return;
