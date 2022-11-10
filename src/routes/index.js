@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/TempHumidity.controller');
+const getData = require('../controllers/TempHumidity.controller');
 
-router.get('/', controller.getData);
-router.post('/', controller.createData);
+router.get('/', getData);
 
 module.exports = router;
