@@ -2,6 +2,9 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+console.log(require('os').hostname())
+
+
 // express server on port 3000
 const express = require("express");
 const app = express();
@@ -32,4 +35,3 @@ db.then(() => {
 // Routes
 const indexRouter = require("./src/routes/index");
 app.use("/data", indexRouter);
-app.get("/", (req, res) => res.status(200).json({ message: "NodeMCU IoT Project" }));
