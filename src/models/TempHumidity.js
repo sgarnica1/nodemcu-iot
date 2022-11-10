@@ -1,18 +1,23 @@
-const mongoose = require('mongoose');
+const { DataTypes } = require("sequelize");
+const sequelize = require("../sql/config");
 
-const TempHumiditySchema = new mongoose.Schema({
+const TempHumidity = sequelize.define(
+  "TempHumidity",
+  {
     temperature: {
-        type: Number,
-        required: true
+      type: DataTypes.FLOAT,
+      allowNull: false,
     },
     humidity: {
-      type: Number,
-      required: true
-    },
-    date: {
-      type: Date,
-      default: Date.now
+      type: DataTypes.FLOAT,
+      allowNull: false,
     }
-});
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('TempHumidity', TempHumiditySchema);
+sequelize.sync();
+
+module.exports = TempHumidity;
