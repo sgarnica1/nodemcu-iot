@@ -1,21 +1,17 @@
 const TempHumidity = require("../models/TempHumidity");
 const getData = async (req, res) => {
-  res.json({
-    args: req.query,
-    headers: req.headers,
-  })
-  // console.log(req.query)
-  // // res.json({query: req.body});
-  // if (req.query.temperature && req.query.humidity) {
-  //   createData(req, res);
-  //   return;
-  // }
-  // try {
-  //   const data = await TempHumidity.find();
-  //   res.status(200).json(data);
-  // } catch (err) {
-  //   res.status(500).json({ message: err.message });
-  // }
+  console.log(req.query)
+  // res.json({query: req.body});
+  if (req.query.temperature && req.query.humidity) {
+    createData(req, res);
+    return;
+  }
+  try {
+    const data = await TempHumidity.find();
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 const createData = async (req, res) => {
   const data = new TempHumidity({
