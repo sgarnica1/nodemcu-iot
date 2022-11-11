@@ -34,4 +34,4 @@ db.then(() => {
 
 // Routes
 const indexRouter = require("./src/routes/index");
-app.use("/data", indexRouter);
+app.use("/get", indexRouter);
