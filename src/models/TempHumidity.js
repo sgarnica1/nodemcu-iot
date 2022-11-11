@@ -9,6 +9,10 @@ const TempHumiditySchema = new mongoose.Schema({
       type: Number,
       required: true
     },
+    alarm: {
+      type: Boolean,
+      required: true
+    },
     date: {
       type: Date,
       default: Date.now
