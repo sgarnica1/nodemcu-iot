@@ -1,11 +1,10 @@
+// CONFIG
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
+const config = require("./src/config/index");
 
-console.log(require('os').hostname())
-
-
-// express server on port 3000
+// SERVER
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,7 +13,7 @@ const port = process.env.PORT || 3000;
 const cors = require("cors");
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "*",
     optionsSuccessStatus: 200,
   })
 );
@@ -22,16 +21,25 @@ app.use(
 // MIDDLEWARE
 app.use(express.json());
 
-// Connect to MongoDB
+// DB
 const mongoose = require("mongoose");
 const db = mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true
+  useNewUrlParser: true,
 });
 db.then(() => {
   app.listen(port, () => console.log(`App listening on port ${port}!`));
 }).catch((err) => console.log(err));
 
+// REDIRECT TO BASE PATH
+app.get("/", (_, res) => {
+  res.redirect(config.BASE_PATH);
+});
 
-// Routes
-const indexRouter = require("./src/routes/index");
-app.use("/get", indexRouter);
+// ROUTES
+const initRoutes = require("./src/routes/index");
+initRoutes(app);
+
+// 404 ERROR
+app.use((_, res) => {
+  res.status(404).json({ message: "Resource not found" });
+});

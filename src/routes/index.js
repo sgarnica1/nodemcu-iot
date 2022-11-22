@@ -1,7 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const getData = require('../controllers/TempHumidity.controller');
+const config = require("../config/index");
+const temphumidityRouter = require("./temphumidity.routes");
+const initRouter = require("./init.routes");
 
-router.get('/', getData);
+const initRoutes = app => {
+  app.use(`${config.BASE_PATH}/`, initRouter);
+  app.use(`${config.BASE_PATH}/data`, temphumidityRouter);
+}
 
-module.exports = router;
+module.exports = initRoutes;
