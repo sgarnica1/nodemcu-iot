@@ -1,22 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const TempHumiditySchema = new mongoose.Schema({
+const TempHumiditySchema = new mongoose.Schema(
+  {
     temperature: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     humidity: {
       type: Number,
-      required: true
+      required: true,
     },
     alarm: {
       type: Boolean,
-      required: true
+      required: true,
     },
-    date: {
-      type: Date,
-      default: Date.now()
-    }
-});
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('TempHumidity', TempHumiditySchema);
+module.exports = mongoose.model("TempHumidity", TempHumiditySchema);

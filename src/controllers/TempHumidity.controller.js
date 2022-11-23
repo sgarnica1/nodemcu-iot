@@ -8,7 +8,7 @@ const getData = async (req, res) => {
     return;
   }
   try {
-    const data = await TempHumidity.find().sort({ date: -1 });
+    const data = await TempHumidity.find().sort({ createdAt: - 1 });
     res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ message: err.message });
